@@ -45,7 +45,7 @@
                    컴포넌트 제작 
                    ====== 재사용 == Modal
                 beforeDestroy() => 화면 변경 전 
-                destoryed => 화면이 변경 
+                destroyed => 화면이 변경 
                 $.ajax({
                    })
                 let app=Vue.createApp({
@@ -54,7 +54,7 @@
                    methods:{
                       사용자 정의 함수 
                    }
-                   comonents:등록 
+                   components:등록 
                 }).mount(app)
            **2. 디렉티브 : 태그 제어 
                 v-for : 태그안에 속성 
