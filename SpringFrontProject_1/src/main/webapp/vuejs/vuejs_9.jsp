@@ -46,8 +46,6 @@
            ============================================= RestFul 
            axios.put()  => @PutMapping => UPDATE
            axios.delete() => @DeleteMapping => DELETE
-        
-           
    */
    let app=Vue.createApp({
 	   data(){
