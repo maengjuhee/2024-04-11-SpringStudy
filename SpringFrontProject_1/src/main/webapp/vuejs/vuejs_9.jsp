@@ -57,7 +57,7 @@
 	   },
 	   methods:{
 		   // id => ref의 속성을 이용
-		   // this.$refs.ref명.fucus() , value... => input tag 제어 
+		   // this.$refs.ref명.focus() , value... => input tag 제어 
 		   // => e.target.value => React
 		   // => $('#fd').val() => jquery
 		   // submit버튼은 사용하지 않는다 => 자체에서 CRUD를 처리 
