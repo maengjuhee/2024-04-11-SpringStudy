@@ -1,6 +1,7 @@
 package com.sist.dao;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.*;
@@ -33,4 +34,42 @@ public class RecipeDAO {
   {
 	  return mapper.recipeHitTop8();
   }
+  /*
+   *  @Select("SELECT no,poster,title,chef,hit,num "
+			   +"FROM (SELECT no,poster,title,chef,hit,rownum as num "
+	           +"FROM (SELECT no,poster,title,chef,hit "
+			   +"FROM recipe WHERE no IN(SELECT no FROM recipe "
+	           +"INTERSECT SELECT no FROM recipedetail))) "
+			   +"WHERE num BETWEEN #{start} AND #{end}")
+	   public List<RecipeVO> recipeListData(Map map);
+	   
+	   @Select("SELECT CEIL(COUNT(*)/12.0) FROM recipe "
+			   +"WHERE no IN(SELECT no FROM recipe "
+			   +"INTERSECT SELECT no FROM recipedetail")
+	   public int recipeTotalPage();
+   */
+   public List<RecipeVO> recipeListData(Map map)
+   {
+	   return mapper.recipeListData(map);
+   }
+   public int recipeTotalPage()
+   {
+	   return mapper.recipeTotalPage();
+   }
+   // 상세보기
+   /*
+    *  @Update("UPDATE recipe SET "
+			   +"hit=hit+1 "
+			   +"WHERE no=#{no}")
+	   public void hitIncrement(int no);
+	   
+	   @Select("SELECT * FROM recipedetail "
+			   +"WHERE no=#{no}")
+	   public RecipeDetailVO recipeDetailData(int no);
+    */
+    public RecipeDetailVO recipeDetailData(int no)
+    {
+    	mapper.hitIncrement(no);
+    	return  mapper.recipeDetailData(no);
+    }
 }

@@ -18,7 +18,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>맛집 목록</h2>
+                        <h2>레시피 목록</h2>
                     </div>
                 </div>
             </div>
@@ -46,12 +46,12 @@
             <div class="row">
 
                 <!-- Single Post -->
-                <div class="col-12 col-md-6 col-lg-4" v-for="vo in food_list">
+                <div class="col-12 col-md-6 col-lg-4" v-for="vo in recipe_list">
                     <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
                         <!-- Post Thumb -->
                         <div class="post-thumb">
-                          <a :href="'../food/detail_before.do?fno='+vo.fno">
-                            <img :src="'http://www.menupan.com'+vo.poster" style="width: 350px;height: 200px">
+                          <a :href="'../recipe/detail.do?no='+vo.no">
+                            <img :src="vo.poster" style="width: 350px;height: 200px">
                           </a>
                         </div>
                         <!-- Post Content -->
@@ -60,11 +60,11 @@
                                 <div class="post-author-date-area d-flex">
                                     <!-- Post Author -->
                                     <div class="post-author">
-                                        <a href="#">{{vo.type}}</a>
+                                        <a href="#">{{vo.chef}}</a>
                                     </div>
                                     <!-- Post Date -->
                                     <div class="post-date">
-                                        <a href="#" style="color: orange;">{{vo.score}}</a>
+                                        <a href="#" style="color: orange;">{{vo.hit}}</a>
                                     </div>
                                 </div>
                                 <!-- Post Comment & Share Area -->
@@ -83,8 +83,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <a :href="'../food/detail_before.do?fno='+vo.fno">
-                                <h4 class="post-headline">{{vo.name}}</h4>
+                            <a :href="'../recipe/detail.do?no='+vo.no">
+                                <h4 class="post-headline">{{vo.title}}</h4>
                             </a>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                                     <a class="page-link" @click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i>이전 </a>
                                 </li>
                                 
-                                <li :class="i===curpage?'page-item active':'page-item'" v-for="i in range(startPage,endPage)">
+                                <li class="i===curpage?'page-item active':'page-item'" v-for="i in range(startPage,endPage)">
                                     <a class="page-link" @click="pageChange(i)">{{i}} </a>
                                 </li>
                                 
@@ -121,7 +121,7 @@
     	  //Model => 데이터관리
     	  data(){
     		  return{
-    			  food_list:[],
+    			  recipe_list:[],
     			  curpage:1,
     			  totalpage:0,
     			  startPage:0,
@@ -155,13 +155,13 @@
     			  return arr
     		  },
     		  dataRecv(){
-    			  axios.get('../food/list_vue.do',{
+    			  axios.get('../recipe/list_vue.do',{
     				  params:{
     					  page:this.curpage
     				  }
     			  }).then(response=>{
     				  console.log(response.data)
-    				  this.food_list=response.data.list
+    				  this.recipe_list=response.data.list
     				  this.curpage=response.data.curpage
     				  this.totalpage=response.data.totalpage
     				  this.startPage=response.data.startPage
